@@ -653,6 +653,116 @@ nav button{cursor:pointer}
 .gl{position:absolute;right:96%;top:38%;width:80%;height:26%;background:linear-gradient(90deg,transparent,rgba(255,30,45,.85));filter:blur(7px)}
 .tr-upw{position:absolute;left:50%;top:100%;width:clamp(130px,17vw,210px);transform:translate(-50%,-50%) rotate(-90deg);opacity:0;filter:drop-shadow(0 0 16px #ff1e2d)}
 @media(prefers-reduced-motion:reduce){.tl>*,.back,.ci,.hx,.rg,.holo i,.tr-road{animation:none!important}}
+
+/* ===== v4: HOME — name float + photo glow ===== */
+.hero-name{position:relative}
+.hero-name>span{animation:nmFloat 6.5s ease-in-out infinite}
+.hero-name>span:nth-child(2){animation-delay:-1.6s}.hero-name>span:nth-child(3){animation-delay:-3.2s}
+@keyframes nmFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.hero-name::before{content:"";position:absolute;left:-5%;top:8%;width:85%;height:84%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 40% 50%,rgba(255,30,45,.3),transparent 68%);filter:blur(20px);animation:nmGlow 4.5s ease-in-out infinite alternate}
+.hero-name::after{content:"";position:absolute;left:0;bottom:-.04em;height:3px;width:44%;pointer-events:none;background:linear-gradient(90deg,#ff1e2d,#fff 55%,transparent);box-shadow:0 0 12px #ff1e2d;transform-origin:left;animation:nmLine 5.5s ease-in-out infinite}
+@keyframes nmGlow{from{opacity:.4;transform:scale(.95)}to{opacity:1;transform:scale(1.06)}}
+@keyframes nmLine{0%{transform:scaleX(0);opacity:0}15%{opacity:1}55%,80%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.headlight-frame.cutout .cimg{cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 0 7px rgba(255,60,75,.95)) drop-shadow(0 0 24px rgba(255,30,45,.6)) drop-shadow(0 18px 26px rgba(0,0,0,.75))}
+.cimg:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:8px}
+.aura{position:absolute;left:50%;bottom:0;width:92%;height:92%;z-index:1;pointer-events:none;transform:translateX(-50%);background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,40,60,.38),rgba(120,0,20,.18) 55%,transparent 76%);animation:auraP 4.8s ease-in-out infinite alternate}
+@keyframes auraP{to{opacity:.55;transform:translateX(-50%) scale(1.07)}}
+.ringg{position:absolute;left:50%;top:6%;height:72%;aspect-ratio:1;translate:-50% 0;z-index:1;pointer-events:none;border-radius:50%;opacity:.8;background:conic-gradient(rgba(255,30,45,0),rgba(255,50,70,.95) 18%,rgba(255,30,45,0) 36%,rgba(255,255,255,.85) 52%,rgba(255,30,45,0) 68%,rgba(255,30,45,.9) 84%,rgba(255,30,45,0));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));filter:drop-shadow(0 0 8px rgba(255,40,60,.9));animation:ringSpin 14s linear infinite}
+@keyframes ringSpin{to{rotate:360deg}}
+.rip{position:absolute;left:50%;top:44%;width:46%;aspect-ratio:1;translate:-50% -50%;z-index:2;pointer-events:none;border-radius:50%;border:2px solid rgba(255,80,95,.9);box-shadow:0 0 18px rgba(255,30,45,.8),inset 0 0 18px rgba(255,30,45,.4);animation:ripO .9s ease-out forwards}
+@keyframes ripO{from{scale:.5;opacity:.9}to{scale:1.5;opacity:0}}
+
+/* ===== v4: PERSONAL INFORMATION — title + futuristic background ===== */
+.view:nth-child(2) .fit{position:relative;z-index:1}
+.pi-title .pw{display:inline-block;white-space:nowrap}
+.pi-title i{display:inline-block;font-style:normal;animation:piWave 3.8s ease-in-out calc(var(--i)*-.16s) infinite}
+@keyframes piWave{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.pi-title{animation:piGlow 4.5s ease-in-out infinite alternate}
+@keyframes piGlow{from{text-shadow:0 0 12px rgba(255,30,45,.8)}to{text-shadow:0 0 26px #ff1e2d,0 0 48px rgba(255,30,45,.4)}}
+.pibg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:layout paint}
+.pibg svg.wf{fill:none;stroke:rgba(255,100,110,.9);stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}
+.neb{position:absolute;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(255,30,45,.17),transparent 62%);animation:nebM 28s ease-in-out infinite alternate}
+.neb.n1{left:-26vmax;top:-32vmax}
+.neb.n2{right:-30vmax;bottom:-36vmax;background:radial-gradient(circle,rgba(120,80,255,.13),rgba(255,30,45,.06) 42%,transparent 64%);animation-duration:36s;animation-direction:alternate-reverse}
+@keyframes nebM{to{transform:translate(6vmax,5vmax) scale(1.12)}}
+.stl{position:absolute;left:0;top:0;width:var(--z);height:var(--z);border-radius:50%;animation:twk var(--t) ease-in-out infinite alternate}
+@keyframes twk{from{opacity:.3}to{opacity:1}}
+.met{position:absolute;left:var(--x);top:var(--y);width:var(--len);height:2px;border-radius:2px;opacity:0;transform-origin:0 50%;animation:metK var(--t) linear var(--dl) infinite}
+.ml{background:linear-gradient(90deg,#fff,rgba(255,110,120,.85) 18%,rgba(255,30,45,0))}
+.mr{background:linear-gradient(270deg,#fff,rgba(255,110,120,.85) 18%,rgba(255,30,45,0))}
+.met::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,80,95,.9)}
+.ml::after{left:-2px}.mr::after{right:-2px}
+@keyframes metK{0%{opacity:0;transform:rotate(var(--a)) translateX(0)}3%{opacity:1}20%{opacity:1}26%,100%{opacity:0;transform:rotate(var(--a)) translateX(var(--dist))}}
+.prt{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:#ff7a85;box-shadow:0 0 8px 1px rgba(255,40,60,.85);opacity:.2;animation:prtK var(--du) ease-in-out var(--dl) infinite}
+@keyframes prtK{0%,100%{opacity:.15;transform:translate(0,0)}50%{opacity:.9;transform:translate(var(--dx),var(--dy))}}
+.fly{position:absolute;left:0;top:var(--y);width:var(--w);opacity:var(--o);will-change:transform}
+.fly.R{animation:flyR var(--du) linear var(--dl) infinite}.fly.L{animation:flyL var(--du) linear var(--dl) infinite}
+@keyframes flyR{from{transform:translate3d(-35vw,0,0)}to{transform:translate3d(140vw,0,0)}}
+@keyframes flyL{from{transform:translate3d(140vw,0,0)}to{transform:translate3d(-35vw,0,0)}}
+.fly svg{display:block;width:100%;overflow:visible;filter:drop-shadow(0 0 7px rgba(255,30,45,.65));animation:fxBob 4.5s ease-in-out infinite}
+.fly.L svg{scale:-1 1}
+@keyframes fxBob{50%{translate:0 -8px}}
+.fly::before{content:"";position:absolute;top:44%;height:8%;width:60%;background:linear-gradient(90deg,transparent,rgba(255,60,75,.85));filter:blur(3px)}
+.fly.R::before{right:98%}.fly.L::before{left:98%;background:linear-gradient(270deg,transparent,rgba(255,60,75,.85))}
+.fx{position:absolute;width:var(--w);opacity:var(--o);animation:fxDr var(--du) ease-in-out var(--dl) infinite alternate}
+.fx svg{display:block;width:100%;overflow:visible;filter:drop-shadow(0 0 5px rgba(255,30,45,.5))}
+.fx svg.spn{animation:fxSp var(--sp) linear infinite}
+@keyframes fxDr{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rr))}}
+@keyframes fxSp{to{rotate:360deg}}
+.fxg{width:auto;font:700 var(--fs) Orbitron;color:rgba(255,100,110,.95);white-space:nowrap;text-shadow:0 0 8px rgba(255,30,45,.7)}
+.fxp{position:relative;width:100%;aspect-ratio:3/2;border:1px solid rgba(255,100,110,.75);background:linear-gradient(rgba(255,30,45,.18),rgba(255,30,45,.02));box-shadow:0 0 16px rgba(255,30,45,.35);transform:perspective(400px) rotateY(var(--ry));overflow:hidden}
+.fxp b{display:block;height:3px;margin:9px 8px 0;background:rgba(255,160,170,.6)}.fxp b:nth-child(2){width:55%}.fxp b:nth-child(3){width:75%}
+.fxp i{position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,255,255,.75);animation:fxScan 2.6s linear infinite}
+@keyframes fxScan{to{transform:translateY(95px)}}
+.pibg #hcar,.pibg #circ{stroke-dasharray:none}
+.pibg use[href="#circ"]{stroke-dasharray:6 10;animation:dsh 3s linear infinite}
+@media(max-width:700px){.pibg .dm{display:none}.fly{--w:90px}.met:nth-of-type(n+5){display:none}}
+
+/* ===== v4: ACHIEVEMENTS — floating frames, years, bullet lists ===== */
+.lvl{animation:achup .9s cubic-bezier(.2,.8,.2,1) var(--d) backwards,lvlFloat 6.4s ease-in-out calc(1.7s + var(--i)*.55s) infinite}
+@keyframes lvlFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.lvl-lab{font-size:clamp(.62rem,1.5vh,.86rem);letter-spacing:.14em;text-shadow:0 0 12px rgba(255,30,45,.55)}
+.lvl-card{position:relative;background:radial-gradient(120% 60% at 88% 0%,rgba(255,30,45,.24),transparent 62%) padding-box,linear-gradient(165deg,#240912,#0b0206) padding-box,linear-gradient(135deg,#ff1e2d,rgba(255,255,255,.9) 38%,#a80010 62%,#ff1e2d) border-box;transition:box-shadow .5s ease,transform .3s ease}
+.lvl-card::before{content:"";position:absolute;left:14px;right:14px;top:-2px;height:2px;border-radius:2px;pointer-events:none;background:linear-gradient(90deg,transparent,#fff 45%,#ff1e2d 55%,transparent);background-size:220% 100%;animation:edgeSh 5s ease-in-out calc(var(--i)*.8s) infinite}
+@keyframes edgeSh{from{background-position:120% 0}to{background-position:-120% 0}}
+.lvl:hover .lvl-card,.lvl.f .lvl-card{box-shadow:0 20px 50px rgba(0,0,0,.55),0 0 36px rgba(255,30,45,.42)}
+.lvl:active .lvl-card{transform:scale(.985)}
+.yrs{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.yr{font:700 clamp(.6rem,1.45vh,.8rem) Orbitron;letter-spacing:.16em;color:#fff;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,30,45,.7);background:linear-gradient(90deg,rgba(255,30,45,.32),rgba(255,30,45,.06));box-shadow:0 0 12px rgba(255,30,45,.25);white-space:nowrap}
+.yr.now{border-color:rgba(76,255,136,.75);background:linear-gradient(90deg,rgba(76,255,136,.25),rgba(76,255,136,.04));box-shadow:0 0 12px rgba(76,255,136,.25)}
+.yr.now::after{content:"";display:inline-block;width:6px;height:6px;margin-left:8px;border-radius:50%;background:#4cff88;box-shadow:0 0 8px #4cff88;animation:bl 1.2s infinite}
+.school{font:700 clamp(.95rem,2.1vh,1.2rem)/1.1 var(--serif);color:rgba(255,233,234,.9);overflow-wrap:anywhere}
+.frame,.cutbox{max-height:clamp(84px,22vh,190px)}
+.ah{font:500 clamp(.46rem,1.05vh,.58rem) Orbitron;letter-spacing:.22em;color:var(--red);margin-top:2px}
+.bl{list-style:none;display:flex;flex-direction:column;gap:clamp(3px,.7vh,6px)}
+.bl li{position:relative;padding-left:16px;line-height:1.18}
+.bl li::before{content:"";position:absolute;left:2px;top:.48em;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red)}
+.bl b{font:700 clamp(.82rem,1.8vh,1rem)/1.15 Rajdhani;color:#fff}
+.bl small{font:500 clamp(.7rem,1.5vh,.84rem)/1.2 Rajdhani;color:#ffb3b9}
+.bl small::before{content:" \2014 ";color:rgba(255,179,185,.6)}
+.soon{font:500 clamp(.72rem,1.5vh,.85rem)/1.3 Rajdhani;color:rgba(255,233,234,.7)}
+.lvl-card .hn.now small::before{content:none}
+.lvl-card .hn.now{flex:none}
+.shots{padding-top:clamp(16px,3.2vh,30px)}
+@media(max-width:900px){
+ .ach{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+ .ach-in{height:auto;display:flex;flex-direction:column;gap:18px;overflow:visible;padding-bottom:16px}
+ .edu,.edu[data-f]{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;gap:22px var(--gap)}
+ .edu[data-f] .lvl:not(.f){transform:none;opacity:1;filter:none}.lvl.f{transform:none}
+ .lvl-card{flex:none}
+ .ach-head{flex-wrap:wrap}
+}
+@media(max-width:640px){
+ .edu,.edu[data-f]{grid-template-columns:1fr}
+ .lvl-top .ln{margin-right:0}
+ .ach-head{flex-direction:column;align-items:flex-start}
+ .frame,.cutbox{max-height:150px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .hero-name>span,.hero-name::before,.hero-name::after,.aura,.ringg,.lvl,.lvl-card::before,.pi-title,.pi-title i,.pibg *{animation:none!important}
+ .met{display:none}
+}
 </style>
 </head>
 <body>
@@ -681,20 +791,20 @@ const ME={
   about:"Hi, I'm Besha Doloree L. Carillo, a first-year BS Computer Science student at the University of the Cordilleras. I love coding, solving problems and learning new technologies, and I'm working toward becoming a computer scientist who builds things that matter.",
   phone:"+63 921 915 9314",
   email:"carillo.bsha@gmail.com",
-  hobbies:["Coding","Problem solving","Learning new tech"],
+  hobbies:["Coding","Problem solving","Learning new tech","Add your hobby"],
   skills:["Python","JavaScript","HTML / CSS","Java","C / C++","Git & GitHub"],
   awards:[
     {t:"Certificate / Course",b:"Add the course or certificate name, provider, and completion year."},
     {t:"Academic Achievement",b:"Add a real academic honor, competition result, or recognition and the year."},
     {t:"Project Milestone",b:"Describe a project you completed, your contribution, and the tools used."}],
   education:[
-    {lvl:"Elementary",school:"Bugallon Norte Elementary School",photo:"elementary-school.jpg",grad:"elementary-graduation.png",
-     honors:[{t:"Batch Salutatorian"},{t:"Pagsasaling Wika",d:"District Competition Champion"},{t:"Journalism Editorial Writing",d:"District Competition 2nd Place"},{t:"Student Council",d:"Treasurer"}]},
-    {lvl:"Junior High School",school:"University of La Salette",photo:"jhs-school.jpg",grad:"jhs-graduation.png",
-     honors:[{t:"With Honors"},{t:"Consistent Class President"},{t:"Ms. YEARS",d:"3rd Runner-Up"}]},
-    {lvl:"Senior High School",school:"University of La Salette",photo:"shs-school.jpg",grad:"shs-graduation.png",
-     honors:[{t:"With Honors"},{t:"Liaison Officer"}]},
-    {lvl:"College",school:"University of the Cordilleras",photo:"college-school.jpg",grad:null,sub:"BS Computer Science \u00b7 1st Year",honors:[]}],
+    {lvl:"Elementary",years:"2010 \u2013 2018",school:"Bugallon Norte Elementary School",photo:"elementary-school.jpg",grad:"elementary-graduation.png",
+     honors:[{t:"Batch Salutatorian"},{t:"Pagsasaling Wika",d:"District Competition Champion"},{t:"Journalism Editorial Writing",d:"District Competition 2nd Place"},{t:"Student Council",d:"Treasurer"},{t:"Journalism \u2013 Feature Writing",d:"District Competition, 4th Place"},{t:"I-Spell Mo",d:"District Competition, 3rd Place"},{t:"Science Feature Writing",d:"District Competition, 9th Place"}]},
+    {lvl:"Junior High School",years:"2018 \u2013 2022",school:"University of La Salette",photo:"jhs-school.jpg",grad:"jhs-graduation.png",
+     honors:[{t:"With Honors"},{t:"Consistent Class President"},{t:"Ms. YEARS",d:"3rd Runner-Up"},{t:"Spoken Poetry Champion"},{t:"Balagtasan Champion"},{t:"Miss United Nation",d:"1st Runner-Up"},{t:"Miss JETMS",d:"3rd Runner-Up"},{t:"Leadership Award"}]},
+    {lvl:"Senior High School",years:"2022 \u2013 2024",school:"University of La Salette",photo:"shs-school.jpg",grad:"shs-graduation.png",
+     honors:[{t:"With Honors"},{t:"Liaison Officer"},{t:"Best in Salettinian Spirituality"},{t:"Best in Oral Communication"},{t:"Best in Understanding Culture, Society and Politics"}]},
+    {lvl:"College",years:"2026 \u2013 ONGOING",now:true,school:"University of the Cordilleras",photo:"college-school.jpg",grad:null,sub:"BS Computer Science \u00b7 1st Year",honors:[]}],
   certs:[
     {t:"DATA ANALYTICS LEVEL III",img:"cert-data-analytics.jpg"},
     {t:"Search Ads 360",img:"cert-search-ads-360.jpg"},
@@ -735,10 +845,10 @@ const ABOUT=`<div class="c w4" style="--d:.7s"><small>ABOUT ME</small><p class="
 const FAM_HTML=()=>{const [m,f,sb]=ME.family,g=ME.groufie,fp=(c,k,d)=>`<figure class="fp ${k}" style="--d:${d}s"><i class="lay l1"></i><i class="lay l2"></i><div class="fbox"><span class="fph">${c.f}</span>${img(c.photo,c.t)}<figcaption><small>${c.f}</small><b>${c.t}</b></figcaption></div></figure>`;
  return `<div class="fit"><h2>FAMILY &amp; FRIENDS</h2><div class="fam">${fp(m,"fm",.7)}${fp(f,"ff",.9)}${fp(sb,"fs",1.1)}${fp(g,"fg",1.3)}</div></div>`};
 const ACH_HTML=()=>{const E=ME.education,C=ME.certs,n=E.reduce((a,e)=>a+e.honors.length,0),p2=x=>String(x).padStart(2,"0");
- const lvl=(e,i)=>`<article class="lvl" style="--i:${i};--d:${.5+i*.2}s"><div class="lvl-top"><span class="node">${p2(i+1)}</span><span class="lvl-lab">${e.lvl}</span><i class="ln${i===E.length-1?" end":""}">${i===E.length-1?"":"<b></b>"}</i></div>
-  <div class="lvl-card"><h3 class="school">${e.school}</h3>
+ const lvl=(e,i)=>`<article class="lvl" style="--i:${i};--d:${.5+i*.2}s"><div class="lvl-top"><span class="node">${p2(i+1)}</span><span class="lvl-lab" role="heading" aria-level="3">${e.lvl}</span><i class="ln${i===E.length-1?" end":""}">${i===E.length-1?"":"<b></b>"}</i></div>
+  <div class="lvl-card"><div class="yrs"><span class="yr${e.now?" now":""}">${e.years}</span></div><h4 class="school">${e.school}</h4>
    <div class="shots${e.grad?"":" solo"}"><figure class="shot" style="--k:${i*2}"><div class="frame"><span class="ph-t">SCHOOL</span>${pic(e.photo,e.school)}</div><figcaption>School</figcaption></figure>${e.grad?`<figure class="shot grad" style="--k:${i*2+1}"><div class="cutbox"><span class="ph-t">GRADUATION</span><img class="cut" src="${e.grad}" alt="${e.lvl} graduation" decoding="async" onerror="this.remove()"></div><figcaption>Graduation</figcaption></figure>`:""}</div>
-   ${e.honors.length?`<div class="honors">${e.honors.map(h=>`<div class="hn"><b>${h.t}</b>${h.d?`<small>${h.d}</small>`:""}</div>`).join("")}</div>`:`<div class="hn now"><b>${e.sub}</b><small>Currently in progress</small></div>`}</div></article>`;
+   ${e.honors.length?`<div class="ah">ACHIEVEMENTS</div><ul class="bl">${e.honors.map(h=>`<li><b>${h.t}</b>${h.d?`<small>${h.d}</small>`:""}</li>`).join("")}</ul>`:`<div class="ah">STATUS</div><div class="hn now"><b>${e.sub}</b><small>Ongoing</small></div><p class="soon">Current and future achievements will be added here.</p>`}</div></article>`;
  const cert=(c,i,r)=>`<figure class="cert"${r?' aria-hidden="true"':""}><div class="cframe"><span class="cph"><b>${p2(i+1)}</b></span>${pic(c.img,c.t+" certificate")}</div><figcaption>${c.t}</figcaption></figure>`;
  return `<div class="ach"><div class="ach-in">
  <div class="ach-head"><div><div class="ach-kick">ACADEMIC JOURNEY &amp; CREDENTIALS</div><h2 class="ach-title">Achievements <em>&amp; Milestones</em></h2></div>
@@ -749,15 +859,51 @@ const ACH_HTML=()=>{const E=ME.education,C=ME.certs,n=E.reduce((a,e)=>a+e.honors
  </div></div>`};
 const disc=c=>{let h="";for(let i=0;i<24;i++)h+=`<rect x="98" y="8" width="4" height="22" rx="2" transform="rotate(${i*15} 100 100)"/>`;for(let i=0;i<12;i++){const a=i*Math.PI/6;h+=`<circle cx="${100+70*Math.sin(a)}" cy="${100-70*Math.cos(a)}" r="3.4"/>`}for(let i=0;i<5;i++){const a=i*Math.PI*.4;h+=`<circle cx="${100+22*Math.sin(a)}" cy="${100-22*Math.cos(a)}" r="4"/>`}return `<svg class="disc ${c}" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="100" cy="100" r="98"/><circle cx="100" cy="100" r="84"/><circle cx="100" cy="100" r="52"/><circle cx="100" cy="100" r="36"/><circle cx="100" cy="100" r="12"/>${h}</svg>`};
 const BG=`<div class="bgt">${disc("d1")}${disc("d2")}<div class="weave"></div><div class="hc tl">ENGINE <b id="tmp">92</b>°C &middot; OIL <b id="oil">104</b>°C</div><div class="hc tr">X <b id="cx">0000</b> &middot; Y <b id="cy">0000</b></div></div>`;
+/* ===== v4: futuristic background for PERSONAL INFORMATION ===== */
+document.body.insertAdjacentHTML("afterbegin",(()=>{
+ const pins=[34,42,50,58,66].map(v=>`M${v} 26v-12M${v} 74v12M26 ${v}h-12M74 ${v}h12`).join("");
+ let gear="",rim="",gauge="";
+ for(let i=0;i<10;i++)gear+=`<rect x="46" y="9" width="8" height="14" rx="1.5" transform="rotate(${i*36} 50 50)"/>`;
+ for(let i=0;i<5;i++)rim+=`<path d="M50 50V14" transform="rotate(${i*72} 50 50)"/>`;
+ for(let i=0;i<=8;i++){const a=(-120+i*30)*Math.PI/180;gauge+=`<path d="M${(50+34*Math.sin(a)).toFixed(1)} ${(54-34*Math.cos(a)).toFixed(1)}L${(50+43*Math.sin(a)).toFixed(1)} ${(54-43*Math.cos(a)).toFixed(1)}"/>`}
+ return `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <radialGradient id="hvg"><stop offset="0" stop-color="#ff6a75" stop-opacity=".95"/><stop offset="1" stop-color="#ff1e2d" stop-opacity="0"/></radialGradient>
+ <g id="hcar"><path d="M6 44Q8 36 38 32L84 27Q106 11 142 11Q176 12 194 27L226 34Q238 38 234 46L224 50H16Z" fill="#ff1e2d" fill-opacity=".16"/><path d="M92 27Q110 17 140 17Q164 18 180 28Z"/><path d="M20 40H222M150 11V27"/><path d="M224 38H234" stroke="#fff"/><ellipse cx="62" cy="58" rx="28" ry="5" fill="url(#hvg)" stroke="none"/><ellipse cx="184" cy="58" rx="28" ry="5" fill="url(#hvg)" stroke="none"/></g>
+ <g id="chip"><rect x="26" y="26" width="48" height="48" rx="4"/><rect x="38" y="38" width="24" height="24" rx="2" fill="#ff1e2d" fill-opacity=".2"/><path d="${pins}"/><circle cx="32" cy="32" r="1.8" fill="#ff8a94" stroke="none"/></g>
+ <g id="circ"><path d="M0 20H60L80 40H140L160 20H200M0 60H40L60 80H120L140 60H200M30 120V90L50 70M170 0V30L150 50M100 120V100"/><circle cx="60" cy="20" r="3.5" fill="#ff5a66" stroke="none"/><circle cx="140" cy="40" r="3.5" fill="#ff5a66" stroke="none"/><circle cx="120" cy="80" r="3.5" fill="#ff5a66" stroke="none"/><circle cx="50" cy="70" r="3.5" fill="#ff5a66" stroke="none"/></g>
+ <g id="hexg"><polygon points="50,3 93,27 93,73 50,97 7,73 7,27"/><polygon points="50,25 74,38 74,62 50,75 26,62 26,38"/></g>
+ <g id="trig"><path d="M50 8L92 84H8Z"/><path d="M50 36L72 76H28Z"/></g>
+ <g id="cubg"><polygon points="50,6 90,28 90,72 50,94 10,72 10,28"/><path d="M50 50V94M50 50L10 28M50 50L90 28"/></g>
+ <g id="gearg"><circle cx="50" cy="50" r="28"/><circle cx="50" cy="50" r="9"/>${gear}</g>
+ <g id="rimg"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="7"/>${rim}</g>
+ <g id="gaug"><path d="M12 76A42 42 0 1 1 88 76"/>${gauge}<path d="M50 54L66 34"/><circle cx="50" cy="54" r="4"/></g>
+ </defs></svg>`})());
+const PIBG=(()=>{
+ const f=(n,d=0)=>n.toFixed(d),pos=()=>`left:${f(R(1,92))}%;top:${f(R(2,86))}%`,
+  drv=()=>`--dx:${f(R(-14,14))}vw;--dy:${f(R(-12,12))}vh;--rr:${f(R(-28,28))}deg;--du:${f(R(14,30),1)}s;--dl:${f(-R(0,20),1)}s`;
+ const stars=(n,z,bl,sp,t)=>`<i class="stl" style="--z:${z}px;--t:${t}s;box-shadow:${Array.from({length:n},()=>`${f(R(1,99),1)}vw ${f(R(1,88),1)}vh ${bl}px ${sp}px rgba(255,${R(205,255)|0},${R(205,255)|0},${f(R(.55,.95),2)})`).join(",")}"></i>`;
+ const met=()=>{const rv=Math.random()<.35;return `<i class="met ${rv?"mr":"ml"}" style="--x:${f(rv?R(-8,55):R(45,108))}%;--y:${f(R(-6,42))}%;--len:${f(R(90,200))}px;--a:${f(rv?R(24,36):-R(24,36))}deg;--dist:${f((rv?1:-1)*R(55,95))}vw;--t:${f(R(5,11),1)}s;--dl:${f(-R(0,11),1)}s"></i>`};
+ const prt=(_,k)=>`<i class="prt${k%2?" dm":""}" style="left:${f(R(1,99))}%;top:${f(R(3,95))}%;--s:${f(R(2,5),1)}px;--dx:${f(R(-4,4),1)}vw;--dy:${f(R(-9,-2),1)}vh;--du:${f(R(6,14),1)}s;--dl:${f(-R(0,12),1)}s"></i>`;
+ const fly=(id,vb,dir,y,w,du,o,x="",cls="")=>`<div class="fly ${dir}${x}" style="--y:${y}%;--w:${w}px;--du:${du}s;--o:${o};--dl:${f(-R(0,du*.9),1)}s"><svg${cls} viewBox="${vb}"><use href="#${id}"/></svg></div>`;
+ const fx=(id,vb,w,o,x="",spin=false)=>`<div class="fx${x}" style="${pos()};--w:${f(w)}px;--o:${f(o,2)};${drv()}"><svg class="wf${spin?" spn":""}" viewBox="${vb}"${spin?` style="--sp:${f(R(24,60))}s"`:""}><use href="#${id}"/></svg></div>`;
+ const many=(n,fn)=>Array.from({length:n},(_,k)=>fn(k)).join("");
+ const gl=(t,k)=>`<span class="fx fxg${k%3==2?" dm":""}" style="${pos()};--fs:${f(R(.8,1.5),2)}rem;--o:${f(R(.3,.55),2)};${drv()}">${t}</span>`;
+ const pn=k=>`<div class="fx${k?" dm":""}" style="${pos()};--w:${f(R(80,128))}px;--o:.5;${drv()}"><div class="fxp" style="--ry:${f(R(-35,35))}deg"><b></b><b></b><b></b><i></i></div></div>`;
+ return `<div class="pibg" aria-hidden="true"><i class="neb n1"></i><i class="neb n2"></i>${stars(40,1,0,0,3.4)}${stars(26,2,0,0,5.2)}${stars(14,2,3,1,7)}${many(7,met)}${many(16,prt)}`+
+  fly("fcar","0 0 270 66","R",14,170,24,.42)+fly("hcar","0 0 240 70","L",37,150,32,.38,"","")+fly("fcar","0 0 270 66","L",71,110,44,.26," dm")+fly("hcar","0 0 240 70","R",86,100,52,.24," dm")+
+  many(4,k=>fx("chip","0 0 100 100",R(56,92),R(.32,.5),k>1?" dm":""))+many(3,k=>fx("circ","0 0 200 120",R(140,220),R(.3,.45),k>1?" dm":""))+
+  many(2,()=>fx("hexg","0 0 100 100",R(40,100),R(.35,.5),"",true))+many(2,k=>fx("trig","0 0 100 100",R(40,80),R(.35,.5),k?" dm":"",true))+many(2,k=>fx("cubg","0 0 100 100",R(40,86),R(.35,.5),k?" dm":"",true))+
+  many(2,k=>fx("rimg","0 0 100 100",R(70,130),R(.28,.4),k?" dm":"",true))+many(2,k=>fx("gearg","0 0 100 100",R(50,100),R(.3,.45),k?" dm":"",true))+fx("gaug","0 0 100 100",R(80,110),.4)+
+  many(3,pn)+["0101","&lt;/&gt;","{ }","ECU","fn()","RPM","&gt;_","V8"].map(gl).join("")+`</div>`})();
 const views=[
 `<div class="hm hero-center">${BG}<div class="emb">${Array.from({length:24},()=>`<i style="left:${Math.random()*100}%;--s:${3+Math.random()*4}px;--t:${6+Math.random()*9}s;--w:${-Math.random()*12}s;--x:${(Math.random()-.5)*90}px"></i>`).join("")}</div>
 <div class="hero-scan"></div><div class="hero-car" aria-hidden="true"><svg viewBox="0 0 900 250"><path d="M65 174 L140 153 L235 135 L320 82 L520 70 L640 118 L785 140 L842 166 L825 190 L88 190Z" fill="#b90018" stroke="#ff5965" stroke-width="4"/><path d="M315 84 L370 35 L505 34 L590 116 L300 116Z" fill="#09090d" stroke="#ff5965" stroke-width="4"/><path d="M375 43 L490 43 L548 108 L330 108Z" fill="#210710" stroke="#ff9aa2" stroke-width="2"/><path d="M90 168 L205 151 M680 142 L815 160" stroke="#fff" stroke-width="5" opacity=".8"/><path d="M110 194H830" stroke="#ff1e2d" stroke-width="5" opacity=".8"/><circle cx="235" cy="188" r="43" fill="#050507" stroke="#ddd" stroke-width="8"/><circle cx="235" cy="188" r="17" fill="#ff1e2d"/><circle cx="700" cy="188" r="43" fill="#050507" stroke="#ddd" stroke-width="8"/><circle cx="700" cy="188" r="17" fill="#ff1e2d"/><path d="M840 164h35v12h-35" fill="#fff"/></svg></div>
 <div class="hero-content"><div class="hero-kicker"><span></span> DRIVER PROFILE / PORTFOLIO <span></span></div>
 <div class="nm hero-name">${ME.nameLines.map((l,k)=>`<span>${[...l].map((c,j)=>`<i style="--d:${.7+k*.3+j*.045}s;--p:${3+k*.5+j*.18}s">${c===" "?"&nbsp;":c}</i>`).join("")}</span>`).join("")}</div>
-<div class="headlight-frame cutout" id="photoHeadlight" aria-label="Profile portrait">${TECH}<i class="back"></i><i class="floor"></i><i class="cglow"></i><img class="cimg" src="${ME.cutout}" alt="Photo of ${ME.name}" onerror="this.onerror=null;this.src='${ME.photo}';this.classList.add('fb')"></div>
+<div class="headlight-frame cutout" id="photoHeadlight" aria-label="Profile portrait">${TECH}<i class="back"></i><i class="floor"></i><i class="aura"></i><i class="ringg"></i><i class="cglow"></i><img class="cimg" src="${ME.cutout}" alt="Photo of ${ME.name}" onerror="this.onerror=null;this.src='${ME.photo}';this.classList.add('fb')"></div>
 </div>
 <div class="db"><div class="g" id="gt"></div><div class="mid"><div class="led">${"<i></i>".repeat(14)}</div><div class="gear">N</div><div class="lap" id="lap">LAP 00:00.000</div><small>ENGINE ON</small></div><div class="g" id="gs"></div></div></div>`,
-`<div class="fit"><h2>PERSONAL INFORMATION</h2><div class="ag">${ABOUT}${info("BIRTHDAY",bday,"",.8)}${info("AGE",age+" years old","",.95)}${info("YEAR LEVEL",ME.year,"",1.1)}${info("COURSE",ME.course,"",1.25)}${info("COLLEGE",ME.college,"w2",1.4)}${info("ADDRESS",ME.address,"w2",1.55)}${info("PHONE",ME.phone,"w2",1.7)}${info("EMAIL",ME.email,"w2",1.85)}
+`${PIBG}<div class="fit"><h2 class="pi-title" aria-label="PERSONAL INFORMATION">${"PERSONAL INFORMATION".split(" ").map((w,k)=>`<span class="pw" aria-hidden="true">${[...w].map((c,j)=>`<i style="--i:${k*9+j}">${c}</i>`).join("")}</span>`).join(" ")}</h2><div class="ag">${ABOUT}${info("BIRTHDAY",bday,"",.8)}${info("AGE",age+" years old","",.95)}${info("YEAR LEVEL",ME.year,"",1.1)}${info("COURSE",ME.course,"",1.25)}${info("COLLEGE",ME.college,"w2",1.4)}${info("ADDRESS",ME.address,"w2",1.55)}${info("PHONE",ME.phone,"w2",1.7)}${info("EMAIL",ME.email,"w2",1.85)}
 <div class="c w2" style="--d:2s"><small>HOBBIES</small><div class="chips">${ME.hobbies.map((h,i)=>`<em style="--d:${i*.5}s">${h}</em>`).join("")}</div></div>
 <div class="c w2" style="--d:2.15s"><small>SKILLS</small><div class="chips">${ME.skills.map((k,i)=>`<em style="--d:${i*.4}s">${k}</em>`).join("")}</div></div></div></div>`,
 ACH_HTML(),
@@ -768,9 +914,9 @@ function fitAll(){FITS.forEach(d=>{const v=d.parentElement;if(!v.classList.conta
 addEventListener("resize",fitAll);
 /* achievements: shrink-to-fit safety net so the page never scrolls or clips */
 const ACH=document.querySelector(".ach"),ACHIN=ACH.firstElementChild;
-function fitAch(){ACHIN.style.cssText="";const w=ACH.clientWidth,h=ACH.clientHeight;if(!w||!h)return;
- const k=Math.min(1,w/ACHIN.scrollWidth,h/ACHIN.scrollHeight);
- if(k<.985)ACHIN.style.cssText=`width:${100/k}%;height:${100/k}%;max-width:none;transform:scale(${k});transform-origin:0 0`}
+function fitAch(){ACHIN.style.cssText="";if(matchMedia("(max-width:900px)").matches)return;const w=ACH.clientWidth,h=ACH.clientHeight;if(!w||!h)return;
+ let k=1;for(let n=0;n<16;n++){const o=Math.max(...[...ACHIN.querySelectorAll(".lvl-card")].map(c=>c.scrollHeight-c.clientHeight));
+  if(o<=2)break;k*=.97;ACHIN.style.cssText=`width:${100/k}%;height:${100/k}%;max-width:none;transform:scale(${k});transform-origin:0 0`}}
 new ResizeObserver(fitAch).observe(ACH);
 /* achievements: hover/tap focus + photo assembly */
 const eduEl=document.querySelector(".edu"),LV=[...eduEl.querySelectorAll(".lvl")],RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -784,7 +930,7 @@ if(document.fonts)document.fonts.ready.then(fitAch);
 
 /* navigation with car transition */
 let page=0,busy=false;
-function show(i){page=i;V.forEach((v,k)=>v.classList.toggle("on",k===i));document.querySelectorAll("nav button").forEach((b,k)=>b.classList.toggle("on",k===i));fitAll();if(i===2)achAll()}
+function show(i){page=i;V.forEach((v,k)=>v.classList.toggle("on",k===i));document.querySelectorAll("nav button").forEach((b,k)=>b.classList.toggle("on",k===i));fitAll();if(i===2){fitAch();achAll()}}
 const TT=["HOME","PERSONAL INFORMATION","ACHIEVEMENTS","FAMILY AND FRIENDS"];
 function go(i){i=(i+pages.length)%pages.length;if(busy||i===page)return;busy=true;
   document.querySelectorAll("nav button").forEach((b,k)=>b.classList.toggle("on",k===i));
@@ -845,6 +991,13 @@ addEventListener("pointermove",e=>{
 })();
 /* hero spotlight on the cutout follows the cursor */
 addEventListener("pointermove",e=>{const r=photoHeadlight.getBoundingClientRect(),st=photoHeadlight.style,d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));st.setProperty("--sx",(e.clientX-r.left)+"px");st.setProperty("--sy",(e.clientY-r.top)+"px");st.setProperty("--lit",Math.max(.3,Math.min(1,1.25-d/(r.width*.9))))});
+/* v4: profile photo reacts to a click / tap */
+(()=>{const fr=photoHeadlight,im=fr.querySelector(".cimg"),au=fr.querySelector(".aura"),rg=fr.querySelector(".ringg");if(!im)return;
+ const hit=e=>{if(RM)return;const r=fr.getBoundingClientRect(),s=e&&e.clientX&&(e.clientX-r.left)/r.width<.5?-1:1;
+  im.animate([{translate:"0 0",rotate:"0deg",scale:1},{translate:`${-s*4}px -12px`,rotate:`${s*2.2}deg`,scale:1.035,offset:.38},{translate:`${s*1.5}px 2px`,rotate:`${-s*.8}deg`,scale:1.01,offset:.72},{translate:"0 0",rotate:"0deg",scale:1}],{duration:1000,easing:"cubic-bezier(.3,.9,.3,1)"});
+  [rg,au].forEach(el=>el&&el.animate([{scale:1},{scale:1.12,offset:.4},{scale:1}],{duration:1000,easing:"ease-out"}));
+  const p=document.createElement("i");p.className="rip";p.onanimationend=()=>p.remove();fr.appendChild(p)};
+ im.setAttribute("role","button");im.tabIndex=0;im.addEventListener("click",hit);im.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();hit()}})})();
 /* typing roles + lap timer */
 setInterval(()=>{if(page!==0)return;const t=performance.now()-launch;if(t<2000)return;const m=Math.floor(t/60000),x=t%60000;$("lap").textContent="LAP "+String(m).padStart(2,"0")+":"+(x/1000).toFixed(3).padStart(6,"0")},60);
 /* start */
