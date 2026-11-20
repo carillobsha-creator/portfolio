@@ -841,6 +841,47 @@ nav button{cursor:pointer}
 @keyframes laneMv{to{background-position:34px 0}}
 .ach>.pibg{z-index:0}.ach-in{position:relative;z-index:1}
 @media(max-width:900px){.ach>.pibg{position:fixed;inset:56px 0 58px}}
+
+/* ===== v6: personal details, family gallery, cursor glow ===== */
+@keyframes cfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.cimg{object-fit:contain;object-position:bottom}
+/* personal information: extra detail cards */
+.c.ic{display:flex;align-items:center;gap:12px}
+.c.ic>div{min-width:0;flex:1}
+.ic .ico{flex:none;width:clamp(32px,3vw,40px);aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(255,30,45,.65);background:rgba(255,30,45,.12);color:var(--red);border-radius:9px;box-shadow:0 0 12px rgba(255,30,45,.25) inset}
+.ic .ico svg{width:58%;height:58%}
+.ic small{margin-bottom:1px}
+.ic .chips{margin-top:2px}
+.chips em svg{width:1.05em;height:1.05em;margin-right:6px;vertical-align:-.17em}
+/* family & friends gallery: whole photo always visible */
+.fam{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-template-areas:none;height:auto;width:min(100%,1180px);gap:clamp(14px,2vw,26px)}
+.fm,.ff,.fs,.fg{grid-area:auto}
+.fam{--h:clamp(170px,29vh,290px)}
+.fam .fbox{display:flex;align-items:stretch;height:auto}
+.fam .fimg{position:relative;flex:none;height:var(--h);aspect-ratio:var(--r,.75);max-width:64%;overflow:hidden;background:#12000a}
+.fam .fimg .fbd,.fam .fimg .fim{position:absolute;inset:0;width:100%;height:100%}
+.fam .fimg .fbd{object-fit:cover;filter:blur(18px) brightness(.55) saturate(1.1);transform:scale(1.2)}
+.fam .fimg .fim{object-fit:contain;object-position:center}
+.fam figcaption{position:static;flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:clamp(10px,1.8vh,18px) clamp(12px,1.6vw,22px);background:linear-gradient(135deg,rgba(60,8,22,.92),rgba(14,2,8,.95));border-left:2px solid var(--red)}
+.fam figcaption p{margin:4px 0 0;font:500 clamp(.8rem,1.55vh,.98rem)/1.38 Rajdhani;color:rgba(255,233,234,.92);text-wrap:pretty}
+.fam figcaption b{font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.15}
+@media(max-width:900px){
+ .view.scr{overflow-y:auto;overflow-x:hidden;align-items:flex-start;-webkit-overflow-scrolling:touch;padding-top:12px;padding-bottom:26px}
+ .view.scr .fit{margin:auto 0;flex:none}
+ .fam{grid-template-columns:1fr;width:100%;--h:auto}
+ .fam .fbox{flex-direction:column}
+ .fam .fimg{width:100%;height:auto;max-width:100%;aspect-ratio:var(--r,.75);max-height:72vh;margin:0 auto}
+ .fam figcaption{border-left:0;border-top:2px solid var(--red)}
+ .fam figcaption p{font-size:.95rem}
+ .c.ic{gap:10px}
+}
+/* soft glowing cursor */
+#cg{position:fixed;left:0;top:0;width:0;height:0;z-index:9998;pointer-events:none;opacity:0;transition:opacity .35s;will-change:transform}
+#cg.on{opacity:1}
+#cg::before{content:"";position:absolute;left:-120px;top:-120px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,70,85,.32) 0,rgba(255,30,45,.15) 38%,transparent 70%);mix-blend-mode:screen;transition:transform .3s}
+#cg i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#ffd9dc;box-shadow:0 0 10px 3px rgba(255,90,105,.9),0 0 26px 8px rgba(255,30,45,.55);transition:transform .25s}
+#cg.dn::before{transform:scale(1.3)}#cg.dn i{transform:scale(1.5)}
+@media(hover:none),(pointer:coarse){#cg{display:none}}
 </style>
 </head>
 <body>
@@ -878,6 +919,7 @@ const ME={
   year:"1st Year",
   course:"BS Computer Science",
   sex:"Female",status:"Single",height:"5'5\"",weight:"55 kg",
+  nickname:"Besh",nationality:"Filipino",bmi:"Normal",blood:"O",medical:"Healthy",religion:"Iglesia ni Cristo",zodiac:"Aries",birthplace:"Ramon, Isabela",equipment:["Laptop","Wi-Fi","Phone"],
   about:"Hi, I'm Besha Doloree L. Carillo, a first-year BS Computer Science student at the University of the Cordilleras. I love coding, solving problems and learning new technologies, and I'm working toward becoming a computer scientist who builds things that matter.",
   phone:"+63 921 915 9314",
   email:"carillo.bsha@gmail.com",
@@ -903,10 +945,10 @@ const ME={
     {t:"Practicing Data Privacy in the Workplace",img:"cert-data-privacy.jpg"},
     {t:"Participating in Workplace Communication",img:"cert-workplace-communication.jpg"}],
   family:[
-    {f:"MY MOTHER",t:"Arcelee L. Carillo",photo:"mama.jpg"},
-    {f:"MY FATHER",t:"Isabelito P. Carillo",photo:"papa.png"},
-    {f:"MY SIBLINGS",t:"Aira L. Carillo & Precious May L. Carillo",photo:"siblings.png"}],
-  groufie:{f:"MY FRIENDS",t:"Groufie with my friends",photo:"friends-group.png"},
+    {f:"MY MOTHER",t:"Arcelee L. Carillo",photo:"mama.jpg",cap:"Mama, your love never asks for anything in return. Every sacrifice, every sleepless night and every quiet prayer helped shape who I am today. Thank you for always caring for me and standing behind every dream I chase."},
+    {f:"MY FATHER",t:"Isabelito P. Carillo",photo:"papa.jpg",cap:"Papa, you are our protector and our strength. Your guidance lights my way, and with you beside us, our family always feels safe and secure."},
+    {f:"MY SIBLINGS",t:"Aira L. Carillo & Precious May L. Carillo",photo:"siblings.jpg",cap:"My first best friends. From childhood memories to growing up side by side, thank you for being there through everything, no matter what."}],
+  groufie:{f:"MY FRIENDS",t:"Groufie with my friends",photo:"friends-group.jpg",cap:"Real friends turn ordinary days into stories worth remembering. Thank you for the laughter, the shared adventures and the memories that make life brighter."},
   friends:[]
 };
 /* ============================= */
@@ -932,7 +974,9 @@ const GL=t=>`<span class="gl" style="${PS()};--s:${R(.8,1.5).toFixed(2)}rem">${t
 const CARV=()=>`<svg class="tcar" viewBox="0 0 270 66" style="${PS()}"><use href="#fcar"/></svg>`;
 const TECH=`<div class="tech" aria-hidden="true"><div class="tl d1">${RING()}${RING()}${HEX()}${HEX()}${HEX()}${CARV()}${GL("&lt;/&gt;")}${GL("{ }")}</div><div class="tl d2">${CIRC()}${CIRC()}${HOLO()}${HOLO()}${HEX()}${GL("0101")}${GL("&gt;_")}${GL("fn()")}${CARV()}${Array.from({length:14},PT).join("")}</div><div class="tl d3">${HEX()}${HOLO()}${GL("&#9881;")}${GL("1101")}${Array.from({length:9},PT).join("")}</div></div>`;
 const ABOUT=`<div class="c w4" style="--d:.7s"><small>ABOUT ME</small><p class="abt">${ME.about.split(/\s+/).map((w,i)=>`<span class="w" style="--i:${i};--x:${Math.round((Math.random()-.5)*600)}px;--y:${Math.round((Math.random()-.5)*300)}px;--r:${Math.round((Math.random()-.5)*90)}deg">${w}</span>`).join(" ")}</p></div>${info("SEX",ME.sex,"",.8)}${info("STATUS",ME.status,"",.9)}${info("HEIGHT",ME.height,"",1)}${info("WEIGHT",ME.weight,"",1.1)}`;
-const FAM_HTML=()=>{const [m,f,sb]=ME.family,g=ME.groufie,fp=(c,k,d)=>`<figure class="fp ${k}" style="--d:${d}s"><i class="lay l1"></i><i class="lay l2"></i><div class="fbox"><span class="fph">${c.f}</span>${img(c.photo,c.t)}<figcaption><small>${c.f}</small><b>${c.t}</b></figcaption></div></figure>`;
+const fpic=(s,a)=>`<img class="fbd" src="${s}" alt="" aria-hidden="true" decoding="async" onerror="this.remove()"><img class="fim" src="${s}" alt="${a}" decoding="async" onerror="this.remove()" onload="fitRatio(this)">`;
+function fitRatio(im){const f=im.closest(".fp");if(f&&im.naturalHeight){f.style.setProperty("--r",Math.min(1.7,Math.max(.6,im.naturalWidth/im.naturalHeight)).toFixed(3))}if(typeof fitAll==="function")fitAll()}
+const FAM_HTML=()=>{const [m,f,sb]=ME.family,g=ME.groufie,fp=(c,k,d)=>`<figure class="fp ${k}" style="--d:${d}s"><i class="lay l1"></i><i class="lay l2"></i><div class="fbox"><div class="fimg"><span class="fph">${c.f}</span>${fpic(c.photo,c.t)}</div><figcaption><small>${c.f}</small><b>${c.t}</b>${c.cap?`<p>${c.cap}</p>`:""}</figcaption></div></figure>`;
  return `${mkBG()}<div class="fit"><h2>FAMILY &amp; FRIENDS</h2><div class="fam">${fp(m,"fm",.7)}${fp(f,"ff",.9)}${fp(sb,"fs",1.1)}${fp(g,"fg",1.3)}</div></div>`};
 const ACH_HTML=()=>{const E=ME.education,C=ME.certs,n=E.reduce((a,e)=>a+e.honors.length,0),p2=x=>String(x).padStart(2,"0");
  const lvl=(e,i)=>`<article class="lvl" style="--i:${i};--d:${.5+i*.2}s"><div class="lvl-top"><span class="node">${p2(i+1)}</span><span class="lvl-lab" role="heading" aria-level="3">${e.lvl}</span><i class="ln${i===E.length-1?" end":""}">${i===E.length-1?"":"<b></b>"}</i></div>
@@ -987,6 +1031,22 @@ const mkBG=(cls="")=>{
   many(2,()=>fx("hexg","0 0 100 100",R(40,100),R(.35,.5),"",true))+many(2,k=>fx("trig","0 0 100 100",R(40,80),R(.35,.5),k?" dm":"",true))+many(2,k=>fx("cubg","0 0 100 100",R(40,86),R(.35,.5),k?" dm":"",true))+
   many(2,k=>fx("rimg","0 0 100 100",R(70,130),R(.28,.4),k?" dm":"",true))+many(2,k=>fx("gearg","0 0 100 100",R(50,100),R(.3,.45),k?" dm":"",true))+fx("gaug","0 0 100 100",R(80,110),.4)+
   many(3,pn)+["0101","&lt;/&gt;","{ }","ECU","fn()","RPM","&gt;_","V8"].map(gl).join("")+`</div>`};
+const IC=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const ICONS={nick:IC('<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/>'),
+ flag:IC('<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>'),
+ bmi:IC('<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'),
+ blood:IC('<path d="M12 3s6 6.3 6 11a6 6 0 0 1-12 0c0-4.7 6-11 6-11z"/>'),
+ med:IC('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>'),
+ faith:IC('<path d="M12 2v5M10 4.5h4M5 21V11l7-4 7 4v10M9 21v-5a3 3 0 0 1 6 0v5M3 21h18"/>'),
+ aries:IC('<path d="M12 21V10M12 10C12 5.5 9 3.5 6.5 5S4.5 10 8 10.5M12 10c0-4.5 3-6.5 5.5-5s2 5-1.5 5.5"/>'),
+ pin:IC('<path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+ kit:IC('<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/>'),
+ laptop:IC('<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/>'),
+ wifi:IC('<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10.5 10.5 0 0 1 14 0M8.5 16a5.5 5.5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/>'),
+ phone:IC('<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>')};
+const ic=(k,l,v,d)=>`<div class="c ic" style="--d:${d}s"><span class="ico">${ICONS[k]}</span><div><small>${l}</small><b>${v}</b></div></div>`;
+const MORE=ic("nick","NICKNAME",ME.nickname,2.3)+ic("flag","NATIONALITY",ME.nationality,2.4)+ic("bmi","BMI",ME.bmi,2.5)+ic("blood","BLOOD TYPE",ME.blood,2.6)+ic("med","MEDICAL CONDITION",ME.medical,2.7)+ic("faith","RELIGION",ME.religion,2.8)+ic("aries","ZODIAC SIGN",ME.zodiac,2.9)+ic("pin","BIRTHPLACE",ME.birthplace,3)
+ +`<div class="c w4 ic" style="--d:3.1s"><span class="ico">${ICONS.kit}</span><div><small>WORK EQUIPMENT</small><div class="chips">${ME.equipment.map((e,k)=>`<em style="--d:${k*.45}s">${ICONS[e==="Laptop"?"laptop":e==="Phone"?"phone":"wifi"]}${e}</em>`).join("")}</div></div></div>`;
 const PIBG=mkBG();
 const views=[
 `<div class="hm hero-center">${mkBG("soft")}${BG}<div class="emb">${Array.from({length:24},()=>`<i style="left:${Math.random()*100}%;--s:${3+Math.random()*4}px;--t:${6+Math.random()*9}s;--w:${-Math.random()*12}s;--x:${(Math.random()-.5)*90}px"></i>`).join("")}</div>
@@ -998,12 +1058,12 @@ const views=[
 <div class="db"><div class="g" id="gt"></div><div class="mid"><div class="led">${"<i></i>".repeat(14)}</div><div class="gear">N</div><div class="lap" id="lap">LAP 00:00.000</div><small>ENGINE ON</small></div><div class="g" id="gs"></div></div></div>`,
 `${PIBG}<div class="fit"><h2 class="pi-title" aria-label="PERSONAL INFORMATION">${"PERSONAL INFORMATION".split(" ").map((w,k)=>`<span class="pw" aria-hidden="true">${[...w].map((c,j)=>`<i style="--i:${k*9+j}">${c}</i>`).join("")}</span>`).join(" ")}</h2><div class="ag">${ABOUT}${info("BIRTHDAY",bday,"",.8)}${info("AGE",age+" years old","",.95)}${info("YEAR LEVEL",ME.year,"",1.1)}${info("COURSE",ME.course,"",1.25)}${info("COLLEGE",ME.college,"w2",1.4)}${info("ADDRESS",ME.address,"w2",1.55)}${info("PHONE",ME.phone,"w2",1.7)}${info("EMAIL",ME.email,"w2",1.85)}
 <div class="c w2" style="--d:2s"><small>HOBBIES</small><div class="chips">${ME.hobbies.map((h,i)=>`<em style="--d:${i*.5}s">${h}</em>`).join("")}</div></div>
-<div class="c w2" style="--d:2.15s"><small>SKILLS</small><div class="chips">${ME.skills.map((k,i)=>`<em style="--d:${i*.4}s">${k}</em>`).join("")}</div></div></div></div>`,
+<div class="c w2" style="--d:2.15s"><small>SKILLS</small><div class="chips">${ME.skills.map((k,i)=>`<em style="--d:${i*.4}s">${k}</em>`).join("")}</div></div>${MORE}</div></div>`,
 ACH_HTML(),
 FAM_HTML()];
-$("stage").innerHTML=views.map((v,i)=>`<section class="view">${v}</section>`).join("");
+$("stage").innerHTML=views.map((v,i)=>`<section class="view${i===1||i===3?" scr":""}">${v}</section>`).join("");
 const V=[...document.querySelectorAll(".view")],FITS=[...document.querySelectorAll(".fit")];
-function fitAll(){FITS.forEach(d=>{const v=d.parentElement;if(!v.classList.contains("on"))return;d.style.transform="none";const cs=getComputedStyle(v),aw=v.clientWidth-parseFloat(cs.paddingLeft)*2,ah=v.clientHeight-parseFloat(cs.paddingTop)*2,k=Math.min(1,ah/d.offsetHeight,aw/d.scrollWidth);d.style.transform=k<1?`scale(${Math.max(.3,k)})`:"none"})}
+function fitAll(){FITS.forEach(d=>{const v=d.parentElement;if(!v.classList.contains("on"))return;if(v.classList.contains("scr")&&matchMedia("(max-width:900px)").matches){d.style.transform="none";return}d.style.transform="none";const cs=getComputedStyle(v),aw=v.clientWidth-parseFloat(cs.paddingLeft)*2,ah=v.clientHeight-parseFloat(cs.paddingTop)*2,k=Math.min(1,ah/d.offsetHeight,aw/d.scrollWidth);d.style.transform=k<1?`scale(${Math.max(.3,k)})`:"none"})}
 addEventListener("resize",fitAll);
 /* achievements: shrink-to-fit safety net so the page never scrolls or clips */
 const ACH=document.querySelector(".ach"),ACHIN=ACH.firstElementChild;
@@ -1059,7 +1119,8 @@ const goNext=()=>go(page+1,1),goBack=()=>go(page-1,-1);
 $("nbN").onclick=goNext;$("nbB").onclick=goBack;
 $("nav").onclick=e=>{const b=e.target.closest("button");if(b){const i=+b.dataset.i;go(i,i>page?1:-1)}};
 addEventListener("keydown",e=>{if(e.key==="ArrowRight")goNext();if(e.key==="ArrowLeft")goBack()});
-let wl=0;addEventListener("wheel",e=>{if(Date.now()-wl>1200&&Math.abs(e.deltaY)>20){wl=Date.now();e.deltaY>0?goNext():goBack()}},{passive:true});
+let wl=0;addEventListener("wheel",e=>{const sv=V[page];if(sv&&sv.classList.contains("scr")&&sv.scrollHeight>sv.clientHeight+2&&getComputedStyle(sv).overflowY!=="hidden"){const end=e.deltaY>0?sv.scrollTop+sv.clientHeight>=sv.scrollHeight-2:sv.scrollTop<=0;if(!end)return}
+if(Date.now()-wl>1200&&Math.abs(e.deltaY)>20){wl=Date.now();e.deltaY>0?goNext():goBack()}},{passive:true});
 /* keep button hints in sync with the current page */
 function updNav(){const N=pages.length,n=(page+1)%N,p=(page+N-1)%N;$("nbN").title="Next: "+pages[n];$("nbB").title="Back: "+pages[p];$("nbNn").textContent=pad(n+1);$("nbBn").textContent=pad(p+1)}
 const _show=show;show=function(i){_show(i);updNav()};updNav();
@@ -1111,6 +1172,13 @@ addEventListener("pointermove",e=>{const r=photoHeadlight.getBoundingClientRect(
   [rg,au].forEach(el=>el&&el.animate([{scale:1},{scale:1.12,offset:.4},{scale:1}],{duration:1000,easing:"ease-out"}));
   const p=document.createElement("i");p.className="rip";p.onanimationend=()=>p.remove();fr.appendChild(p)};
  im.setAttribute("role","button");im.tabIndex=0;im.addEventListener("click",hit);im.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();hit()}})})();
+/* soft glowing cursor (desktop / mouse only) */
+(()=>{if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;const g=document.createElement("div");g.id="cg";g.setAttribute("aria-hidden","true");g.innerHTML="<i></i>";document.body.appendChild(g);
+ let tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,on=false;const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ addEventListener("pointermove",e=>{if(e.pointerType==="touch")return;tx=e.clientX;ty=e.clientY;if(!on){on=true;x=tx;y=ty;g.classList.add("on")}},{passive:true});
+ document.addEventListener("pointerleave",()=>{on=false;g.classList.remove("on")});document.addEventListener("pointerenter",()=>{});
+ addEventListener("pointerdown",()=>g.classList.add("dn"));addEventListener("pointerup",()=>g.classList.remove("dn"));
+ let pt=performance.now();(function t(n){const k=rm?1:1-Math.exp(-(n-pt)/70);pt=n;x+=(tx-x)*k;y+=(ty-y)*k;g.style.transform=`translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;requestAnimationFrame(t)})(pt)})();
 /* typing roles + lap timer */
 setInterval(()=>{if(page!==0)return;const t=performance.now()-launch;if(t<2000)return;const m=Math.floor(t/60000),x=t%60000;$("lap").textContent="LAP "+String(m).padStart(2,"0")+":"+(x/1000).toFixed(3).padStart(6,"0")},60);
 /* start */
