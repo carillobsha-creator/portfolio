@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23ff1e2d%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22900%22 fill=%22%23000%22%3EB%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <style>
@@ -876,6 +875,49 @@ nav button{cursor:pointer}
  .fam figcaption p{font-size:.95rem}
  .c.ic{gap:10px}
 }
+
+/* v7: section labels, extra detail cards, friends roster */
+.sl{grid-column:1/-1;display:flex;align-items:center;gap:12px;animation:flip 1.3s cubic-bezier(.2,.8,.2,1) var(--d,.8s) backwards}
+.sl span{font:700 .68rem Orbitron;letter-spacing:.22em;color:var(--red);white-space:nowrap}
+.sl::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--red),transparent)}
+.fam .chips{gap:5px;margin:4px 0 2px}
+.fam .chips em{font-size:.62rem;padding:2px 8px;animation:none}
+.frh{width:min(100%,1180px)}
+.frs{justify-content:center;width:min(100%,1180px)}
+.fr p{margin:4px 0 0;font:500 clamp(.78rem,1.5vh,.92rem)/1.35 Rajdhani;color:rgba(255,233,234,.92);text-wrap:pretty}
+.fr b{display:block;font-size:clamp(.95rem,1.5vw,1.15rem)}
+/* v8: pages never scroll; content scales to fit */
+@media(max-width:900px){
+ .view.scr{overflow:hidden!important;align-items:center!important;padding-top:inherit}
+ .view.scr .fit{margin:0!important}
+ .fam{grid-template-columns:1fr 1fr!important;--h:auto}
+ .fam .fimg{max-height:26vh}
+ .fam figcaption p{font-size:.8rem}
+}
+/* v9: personal info uses the full width (6 columns) so it stays large without scrolling */
+@media(min-width:801px){
+ .ag{grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:dense;width:min(100%,1360px)}
+ .ag .w4{grid-column:span 6}.ag .w2{grid-column:span 3}
+ .ag{gap:clamp(6px,1vh,10px)}
+ .ag .c{padding:clamp(7px,1.15vh,12px) clamp(9px,.9vw,14px)}
+ .ag .c b{font-size:clamp(.88rem,1.2vw,1.12rem);line-height:1.2}
+ .ag .c.ic{gap:9px}
+ .ag .ic .ico{width:clamp(26px,2.2vw,34px)}
+ .ag .abt{font-size:clamp(.85rem,1.15vw,1.05rem);line-height:1.4}
+ .ag .chips em{font-size:.68rem;padding:2px 8px}
+}
+/* v9: phones - 4 compact columns so every detail fits on one screen */
+@media(max-width:800px){
+ .ag{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-flow:dense;gap:5px;width:100%}
+ .ag .w4{grid-column:span 4}.ag .w2{grid-column:span 2}
+ .ag .c{padding:6px 8px}
+ .ag .c small{font-size:.5rem;letter-spacing:.08em}
+ .ag .c b{font-size:.78rem;line-height:1.15}
+ .ag .c.ic{gap:6px}
+ .ag .ic .ico{display:none}
+ .ag .abt{font-size:.74rem;line-height:1.3}
+ .ag .chips em{font-size:.58rem;padding:1px 5px}
+}
 /* soft glowing cursor */
 #cg{position:fixed;left:0;top:0;width:0;height:0;z-index:9998;pointer-events:none;opacity:0;transition:opacity .35s;will-change:transform}
 #cg.on{opacity:1}
@@ -883,22 +925,6 @@ nav button{cursor:pointer}
 #cg i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#ffd9dc;box-shadow:0 0 10px 3px rgba(255,90,105,.9),0 0 26px 8px rgba(255,30,45,.55);transition:transform .25s}
 #cg.dn::before{transform:scale(1.3)}#cg.dn i{transform:scale(1.5)}
 @media(hover:none),(pointer:coarse){#cg{display:none}}
-
-/* ===== v7: phones and small tablets — nothing wider than the screen ===== */
-@media(max-width:900px){
- .view.scr .fit,.ach-in{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
- .view.scr .fit>*,.ach-in>*{max-width:100%;min-width:0}
- .fit h2,.pi-title,.ach-title,.ach-kick{white-space:normal;overflow-wrap:break-word;max-width:100%}
- .pi-title .pw{white-space:nowrap}
- .ag,.fam,.edu{min-width:0;max-width:100%}
- .ag>*,.fam>*,.edu>*,.lvl,.lvl-card{min-width:0;max-width:100%}
-}
-@media(max-width:640px){
- header{gap:6px}
- nav{flex:1 1 auto;min-width:0;gap:3px}
- nav button{flex:1 1 0;min-width:0;padding:5px 4px;font-size:clamp(.46rem,2.15vw,.6rem);letter-spacing:.01em;line-height:1.1}
- nav button span{white-space:normal}
-}
 </style>
 </head>
 <body>
@@ -935,8 +961,10 @@ const ME={
   college:"University of the Cordilleras",
   year:"1st Year",
   course:"BS Computer Science",
-  sex:"Female",status:"Single",height:"5'5\"",weight:"55 kg",
-  nickname:"Besh",nationality:"Filipino",bmi:"Normal",blood:"O",medical:"Healthy",religion:"Iglesia ni Cristo",zodiac:"Aries",birthplace:"Ramon, Isabela",equipment:["Laptop","Wi-Fi","Phone"],
+  sex:"Female",status:"Single",height:"5'5\"",weight:"55 kg",waist:"27 in",
+  nickname:"Besh",nationality:"Filipino",bmi:"Normal",blood:"O+",medical:"Healthy",religion:"Iglesia ni Cristo",zodiac:"Aries",birthplace:"Ramon, Isabela",
+  eyes:"Dark Brown",hair:"Dark Brown",hairLen:"Long",skin:"Light Brown",vision:"Clear",hand:"Right",
+  record:"None",allergy:"None",service:"Commute",order:"Youngest",equipment:["Laptop","Wi-Fi","Phone"],
   about:"Hi, I'm Besha Doloree L. Carillo, a first-year BS Computer Science student at the University of the Cordilleras. I love coding, solving problems and learning new technologies, and I'm working toward becoming a computer scientist who builds things that matter.",
   phone:"+63 921 915 9314",
   email:"carillo.bsha@gmail.com",
@@ -947,11 +975,11 @@ const ME={
     {t:"Academic Achievement",b:"Add a real academic honor, competition result, or recognition and the year."},
     {t:"Project Milestone",b:"Describe a project you completed, your contribution, and the tools used."}],
   education:[
-    {lvl:"Elementary",years:"2010 \u2013 2018",school:"Bugallon Norte Elementary School",photo:"elementary-school.jpg",grad:"elementary-graduation.webp",
+    {lvl:"Elementary",years:"2010 \u2013 2018",school:"Bugallon Norte Elementary School",photo:"elementary-school.jpg",grad:"elementary-graduation.png",
      honors:[{t:"Batch Salutatorian"},{t:"Pagsasaling Wika",d:"District Competition Champion"},{t:"Journalism Editorial Writing",d:"District Competition 2nd Place"},{t:"Student Council",d:"Treasurer"},{t:"Journalism \u2013 Feature Writing",d:"District Competition, 4th Place"},{t:"I-Spell Mo",d:"District Competition, 3rd Place"},{t:"Science Feature Writing",d:"District Competition, 9th Place"}]},
-    {lvl:"Junior High School",years:"2018 \u2013 2022",school:"University of La Salette",photo:"jhs-school.jpg",grad:"jhs-graduation.webp",
+    {lvl:"Junior High School",years:"2018 \u2013 2022",school:"University of La Salette",photo:"jhs-school.jpg",grad:"jhs-graduation.png",
      honors:[{t:"With Honors"},{t:"Consistent Class President"},{t:"Ms. YEARS",d:"3rd Runner-Up"},{t:"Spoken Poetry Champion"},{t:"Balagtasan Champion"},{t:"Miss United Nation",d:"1st Runner-Up"},{t:"Miss JETMS",d:"3rd Runner-Up"},{t:"Leadership Award"}]},
-    {lvl:"Senior High School",years:"2022 \u2013 2024",school:"University of La Salette",photo:"shs-school.jpg",grad:"shs-graduation.webp",
+    {lvl:"Senior High School",years:"2022 \u2013 2024",school:"University of La Salette",photo:"shs-school.jpg",grad:"shs-graduation.png",
      honors:[{t:"With Honors"},{t:"Liaison Officer"},{t:"Best in Salettinian Spirituality"},{t:"Best in Oral Communication"},{t:"Best in Understanding Culture, Society and Politics"}]},
     {lvl:"College",years:"2026 \u2013 ONGOING",now:true,school:"University of the Cordilleras",photo:"college-school.jpg",grad:null,sub:"BS Computer Science \u00b7 1st Year",honors:[]}],
   certs:[
@@ -962,11 +990,25 @@ const ME={
     {t:"Practicing Data Privacy in the Workplace",img:"cert-data-privacy.jpg"},
     {t:"Participating in Workplace Communication",img:"cert-workplace-communication.jpg"}],
   family:[
-    {f:"MY MOTHER",t:"Arcelee L. Carillo",photo:"mama.jpg",cap:"Mama, your love never asks for anything in return. Every sacrifice, every sleepless night and every quiet prayer helped shape who I am today. Thank you for always caring for me and standing behind every dream I chase."},
-    {f:"MY FATHER",t:"Isabelito P. Carillo",photo:"papa.webp",cap:"Papa, you are our protector and our strength. Your guidance lights my way, and with you beside us, our family always feels safe and secure."},
-    {f:"MY SIBLINGS",t:"Aira L. Carillo & Precious May L. Carillo",photo:"siblings.webp",cap:"My first best friends. From childhood memories to growing up side by side, thank you for being there through everything, no matter what."}],
-  groufie:{f:"MY FRIENDS",t:"Groufie with my friends",photo:"friends-group.webp",cap:"Real friends turn ordinary days into stories worth remembering. Thank you for the laughter, the shared adventures and the memories that make life brighter."},
-  friends:[]
+    {f:"MY MOTHER",t:"Arcelee L. Carillo",photo:"mama.jpg",cap:"A woman of endless patience and quiet strength. She is caring, selfless and deeply devoted, the heart of our home, whose love and sacrifices built the foundation of everything her family has become."},
+    {f:"MY FATHER",t:"Isabelito P. Carillo",photo:"papa.png",cap:"A man of strength, discipline and integrity. He is hardworking and protective, a steady pillar who leads by example and carries his family with unwavering loyalty and a quiet, constant love."},
+    {f:"MY SIBLINGS",t:"Aira, Precious May & Besha Doloree",photo:"siblings.png",chips:["First Born \u00b7 Aira L. Carillo","Second Born \u00b7 Precious May L. Carillo","Youngest \u00b7 Besha Doloree L. Carillo"],cap:"Three sisters bound by blood and shaped by shared childhoods. Different in personality, united in loyalty, they are each other's first friends, fiercest supporters and keepers of a lifetime of memories."}],
+  groufie:{f:"MY FRIENDS",t:"Groufie with my friends",photo:"friends-group.png",cap:"A circle of loyal, lively and genuine friends. Their laughter, shared adventures and unwavering support turn ordinary days into stories worth remembering."},
+  friends:[
+    "Rowan",
+    "Rhaine",
+    "Mark",
+    "Janessa",
+    "Vien",
+    "Reba",
+    "Jewel",
+    "Josh",
+    "Frae Anne",
+    "Ali",
+    "Novie",
+    "Ashley",
+    "Crisanta",
+    "& Many More"]
 };
 /* ============================= */
 const $=id=>document.getElementById(id),pages=["HOME","PERSONAL INFORMATION","ACHIEVEMENTS","FAMILY & FRIENDS"];
@@ -990,11 +1032,11 @@ const PT=()=>`<b class="pt" style="${PS()};--s:${R(2,8).toFixed(1)}px"></b>`;
 const GL=t=>`<span class="gl" style="${PS()};--s:${R(.8,1.5).toFixed(2)}rem">${t}</span>`;
 const CARV=()=>`<svg class="tcar" viewBox="0 0 270 66" style="${PS()}"><use href="#fcar"/></svg>`;
 const TECH=`<div class="tech" aria-hidden="true"><div class="tl d1">${RING()}${RING()}${HEX()}${HEX()}${HEX()}${CARV()}${GL("&lt;/&gt;")}${GL("{ }")}</div><div class="tl d2">${CIRC()}${CIRC()}${HOLO()}${HOLO()}${HEX()}${GL("0101")}${GL("&gt;_")}${GL("fn()")}${CARV()}${Array.from({length:14},PT).join("")}</div><div class="tl d3">${HEX()}${HOLO()}${GL("&#9881;")}${GL("1101")}${Array.from({length:9},PT).join("")}</div></div>`;
-const ABOUT=`<div class="c w4" style="--d:.7s"><small>ABOUT ME</small><p class="abt">${ME.about.split(/\s+/).map((w,i)=>`<span class="w" style="--i:${i};--x:${Math.round((Math.random()-.5)*600)}px;--y:${Math.round((Math.random()-.5)*300)}px;--r:${Math.round((Math.random()-.5)*90)}deg">${w}</span>`).join(" ")}</p></div>${info("SEX",ME.sex,"",.8)}${info("STATUS",ME.status,"",.9)}${info("HEIGHT",ME.height,"",1)}${info("WEIGHT",ME.weight,"",1.1)}`;
+const ABOUT=`<div class="c w4" style="--d:.7s"><small>ABOUT ME</small><p class="abt">${ME.about.split(/\s+/).map((w,i)=>`<span class="w" style="--i:${i};--x:${Math.round((Math.random()-.5)*600)}px;--y:${Math.round((Math.random()-.5)*300)}px;--r:${Math.round((Math.random()-.5)*90)}deg">${w}</span>`).join(" ")}</p></div>${info("SEX",ME.sex,"",.8)}${info("STATUS",ME.status,"",.9)}${info("HEIGHT",ME.height,"",1)}${info("WEIGHT",ME.weight,"",1.1)}${info("WAISTLINE",ME.waist,"",1.15)}`;
 const fpic=(s,a)=>`<img class="fbd" src="${s}" alt="" aria-hidden="true" decoding="async" onerror="this.remove()"><img class="fim" src="${s}" alt="${a}" decoding="async" onerror="this.remove()" onload="fitRatio(this)">`;
 function fitRatio(im){const f=im.closest(".fp");if(f&&im.naturalHeight){f.style.setProperty("--r",Math.min(1.7,Math.max(.6,im.naturalWidth/im.naturalHeight)).toFixed(3))}if(typeof fitAll==="function")fitAll()}
-const FAM_HTML=()=>{const [m,f,sb]=ME.family,g=ME.groufie,fp=(c,k,d)=>`<figure class="fp ${k}" style="--d:${d}s"><i class="lay l1"></i><i class="lay l2"></i><div class="fbox"><div class="fimg"><span class="fph">${c.f}</span>${fpic(c.photo,c.t)}</div><figcaption><small>${c.f}</small><b>${c.t}</b>${c.cap?`<p>${c.cap}</p>`:""}</figcaption></div></figure>`;
- return `${mkBG()}<div class="fit"><h2>FAMILY &amp; FRIENDS</h2><div class="fam">${fp(m,"fm",.7)}${fp(f,"ff",.9)}${fp(sb,"fs",1.1)}${fp(g,"fg",1.3)}</div></div>`};
+const FAM_HTML=()=>{const [m,f,sb]=ME.family,g=ME.groufie,fp=(c,k,d)=>`<figure class="fp ${k}" style="--d:${d}s"><i class="lay l1"></i><i class="lay l2"></i><div class="fbox"><div class="fimg"><span class="fph">${c.f}</span>${fpic(c.photo,c.t)}</div><figcaption><small>${c.f}</small><b>${c.t}</b>${c.chips?`<div class="chips">${c.chips.map(x=>`<em>${x}</em>`).join("")}</div>`:""}${c.cap?`<p>${c.cap}</p>`:""}</figcaption></div></figure>`;
+ return `${mkBG()}<div class="fit"><h2>FAMILY &amp; FRIENDS</h2><div class="fam">${fp(m,"fm",.7)}${fp(f,"ff",.9)}${fp(sb,"fs",1.1)}${fp(g,"fg",1.3)}</div><div class="sl frh"><span>MY FRIENDS</span></div><div class="chips frs">${ME.friends.map((x,i)=>`<em style="--d:${i*.3}s">${x}</em>`).join("")}</div></div>`};
 const ACH_HTML=()=>{const E=ME.education,C=ME.certs,n=E.reduce((a,e)=>a+e.honors.length,0),p2=x=>String(x).padStart(2,"0");
  const lvl=(e,i)=>`<article class="lvl" style="--i:${i};--d:${.5+i*.2}s"><div class="lvl-top"><span class="node">${p2(i+1)}</span><span class="lvl-lab" role="heading" aria-level="3">${e.lvl}</span><i class="ln${i===E.length-1?" end":""}">${i===E.length-1?"":"<b></b>"}</i></div>
   <div class="lvl-card"><div class="yrs"><span class="yr${e.now?" now":""}">${e.years}</span></div><h4 class="school">${e.school}</h4>
@@ -1054,6 +1096,15 @@ const ICONS={nick:IC('<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6
  bmi:IC('<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'),
  blood:IC('<path d="M12 3s6 6.3 6 11a6 6 0 0 1-12 0c0-4.7 6-11 6-11z"/>'),
  med:IC('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>'),
+ eye:IC('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+ hairi:IC('<path d="M6 21c0-9 1-15 6-18 5 3 6 9 6 18M10 21c0-6 .5-10 2-13M14 21c0-5-.5-9-2-13"/>'),
+ skini:IC('<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" fill-opacity=".35"/>'),
+ hand:IC('<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11M11 10V4.5a1.5 1.5 0 0 1 3 0V11M14 10V6a1.5 1.5 0 0 1 3 0v7c0 4-2.5 8-6.5 8-3 0-4.5-2-6-5l-1.2-2.4a1.4 1.4 0 0 1 2.3-1.5L8 14"/>'),
+ doc:IC('<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>'),
+ warn:IC('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>'),
+ bus:IC('<rect x="4" y="3" width="16" height="15" rx="2"/><path d="M4 11h16M8 21v-3M16 21v-3M8 15h.01M16 15h.01"/>'),
+ hash:IC('<path d="M5 9h15M4 15h15M10 3L8 21M16 3l-2 18"/>'),
+ fam:IC('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.2"/><path d="M16 14.2c3 .3 5 2.4 5 5.8"/>'),
  faith:IC('<path d="M12 2v5M10 4.5h4M5 21V11l7-4 7 4v10M9 21v-5a3 3 0 0 1 6 0v5M3 21h18"/>'),
  aries:IC('<path d="M12 21V10M12 10C12 5.5 9 3.5 6.5 5S4.5 10 8 10.5M12 10c0-4.5 3-6.5 5.5-5s2 5-1.5 5.5"/>'),
  pin:IC('<path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
@@ -1062,8 +1113,10 @@ const ICONS={nick:IC('<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6
  wifi:IC('<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10.5 10.5 0 0 1 14 0M8.5 16a5.5 5.5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/>'),
  phone:IC('<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>')};
 const ic=(k,l,v,d)=>`<div class="c ic" style="--d:${d}s"><span class="ico">${ICONS[k]}</span><div><small>${l}</small><b>${v}</b></div></div>`;
+const sl=(t,d)=>`<div class="sl w4" style="--d:${d}s"><span>${t}</span></div>`;
 const MORE=ic("nick","NICKNAME",ME.nickname,2.3)+ic("flag","NATIONALITY",ME.nationality,2.4)+ic("bmi","BMI",ME.bmi,2.5)+ic("blood","BLOOD TYPE",ME.blood,2.6)+ic("med","MEDICAL CONDITION",ME.medical,2.7)+ic("faith","RELIGION",ME.religion,2.8)+ic("aries","ZODIAC SIGN",ME.zodiac,2.9)+ic("pin","BIRTHPLACE",ME.birthplace,3)
- +`<div class="c w4 ic" style="--d:3.1s"><span class="ico">${ICONS.kit}</span><div><small>WORK EQUIPMENT</small><div class="chips">${ME.equipment.map((e,k)=>`<em style="--d:${k*.45}s">${ICONS[e==="Laptop"?"laptop":e==="Phone"?"phone":"wifi"]}${e}</em>`).join("")}</div></div></div>`;
+ +ic("eye","EYE COLOR",ME.eyes,3.1)+ic("hairi","HAIR COLOR",ME.hair,3.15)+ic("hairi","HAIR LENGTH",ME.hairLen,3.2)+ic("skini","SKIN TONE",ME.skin,3.25)+ic("eye","VISION",ME.vision,3.35)+ic("hand","DOMINANT HAND",ME.hand,3.4)+ic("warn","ALLERGY",ME.allergy,3.45)+ic("doc","CRIMINAL RECORD",ME.record,3.5)+ic("fam","BIRTH ORDER",ME.order,3.6)+ic("bus","TYPE OF SERVICE",ME.service,3.65)
++`<div class="c w2 ic" style="--d:3.8s"><span class="ico">${ICONS.kit}</span><div><small>WORK EQUIPMENT</small><div class="chips">${ME.equipment.map((e,k)=>`<em style="--d:${k*.45}s">${ICONS[e==="Laptop"?"laptop":e==="Phone"?"phone":"wifi"]}${e}</em>`).join("")}</div></div></div>`;
 const PIBG=mkBG();
 const views=[
 `<div class="hm hero-center">${mkBG("soft")}${BG}<div class="emb">${Array.from({length:24},()=>`<i style="left:${Math.random()*100}%;--s:${3+Math.random()*4}px;--t:${6+Math.random()*9}s;--w:${-Math.random()*12}s;--x:${(Math.random()-.5)*90}px"></i>`).join("")}</div>
@@ -1080,7 +1133,7 @@ ACH_HTML(),
 FAM_HTML()];
 $("stage").innerHTML=views.map((v,i)=>`<section class="view${i===1||i===3?" scr":""}">${v}</section>`).join("");
 const V=[...document.querySelectorAll(".view")],FITS=[...document.querySelectorAll(".fit")];
-function fitAll(){FITS.forEach(d=>{const v=d.parentElement;if(!v.classList.contains("on"))return;if(v.classList.contains("scr")&&matchMedia("(max-width:900px)").matches){d.style.transform="none";return}d.style.transform="none";const cs=getComputedStyle(v),aw=v.clientWidth-parseFloat(cs.paddingLeft)*2,ah=v.clientHeight-parseFloat(cs.paddingTop)*2,k=Math.min(1,ah/d.offsetHeight,aw/d.scrollWidth);d.style.transform=k<1?`scale(${Math.max(.3,k)})`:"none"})}
+function fitAll(){FITS.forEach(d=>{const v=d.parentElement;if(!v.classList.contains("on"))return;d.style.transform="none";const cs=getComputedStyle(v),aw=v.clientWidth-parseFloat(cs.paddingLeft)*2,ah=v.clientHeight-parseFloat(cs.paddingTop)*2,k=Math.min(1,ah/d.offsetHeight,aw/d.scrollWidth);d.style.transform=k<1?`scale(${Math.max(.2,k)})`:"none"})}
 addEventListener("resize",fitAll);
 /* achievements: shrink-to-fit safety net so the page never scrolls or clips */
 const ACH=document.querySelector(".ach"),ACHIN=ACH.firstElementChild;
